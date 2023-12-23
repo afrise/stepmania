@@ -21,6 +21,12 @@
 #define DEFAULT_MOVIE_DRIVER_LIST "FFMpeg,Null"
 #define DEFAULT_SOUND_DRIVER_LIST "AudioUnit,Null"
 
+#elif defined(JELOS)
+#include "ArchHooks/ArchHooks_Unix.h"
+#include "LowLevelWindow/LowLevelWindow_SDL.h" 
+#define DEFAULT_INPUT_DRIVER_LIST "LinuxEvent,LinuxJoystick"
+#define DEFAULT_SOUND_DRIVER_LIST "ALSA-sw,Pulse,Null"
+#define DEFAULT_MOVIE_DRIVER_LIST "FFMpeg,Null"
 
 #elif defined(UNIX)
 #include "ArchHooks/ArchHooks_Unix.h"
