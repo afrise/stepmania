@@ -1,13 +1,11 @@
+This is a modified version of StepMania 5.1 designed to run on Linux Systems without X11. release is aarch64 only. 
+
+
 StepMania
 =========
 
 StepMania is an advanced cross-platform rhythm game for home and arcade use.
 
-[![Continuous integration](https://github.com/stepmania/stepmania/workflows/Continuous%20integration/badge.svg?branch=5_1-new)](https://github.com/stepmania/stepmania/actions?query=workflow%3A%22Continuous+integration%22+branch%3A5_1-new)
-[![Build Status](https://travis-ci.org/stepmania/stepmania.svg?branch=master)](https://travis-ci.org/stepmania/stepmania)
-[![Build status](https://ci.appveyor.com/api/projects/status/uvoplsnyoats81r2?svg=true)](https://ci.appveyor.com/project/Nickito12/stepmania)
-
-## Installation
 ### From Packages
 
 For those that do not wish to compile the game on their own and use a binary right away, be aware of the following issues:
