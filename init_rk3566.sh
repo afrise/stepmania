@@ -12,7 +12,7 @@ cmake --toolchain ~/stepmania/arm64-toolchain.txt -S . -B ./build.rk3566 \
 -DWITH_XINERAMA=OFF \
 -DWITH_X11=OFF \
 -DWITH_XRANDR=OFF \
--DWiTH_LIBXTST=OFF \
+-DWITH_LIBXTST=OFF \
 -DWITH_SYSTEM_GLEW=OFF \
 -DWITH_GTK3=OFF \
 -DWITH_SYSTEM_FFMPEG=OFF \
