@@ -122,18 +122,9 @@ void LowLevelWindow_SDL::SwapBuffers()
 }
 
 void LowLevelWindow_SDL::GetDisplaySpecs(DisplaySpecs &out) const {
-	SDL_DisplayMode* mode;
-	Uint32 f;
-
-	SDL_GetCurrentDisplayMode(0, mode);
-
-	
-	f=mode->format;
-
-	LOG->Info( "LowLevelSDL: Getting Display Specs: %sx%s %sHz", mode->w, mode->h, mode->refresh_rate);
 	out.clear();
-	DisplayMode sdlMode = {(uint)(mode->w), (uint)(mode->h), mode->refresh_rate};
-	DisplaySpec sdlSpec("SDL", "SDL", sdlMode);
+	DisplayMode sdlMode = {(uint)(CurrentParams.width), (uint)(CurrentParams.height), (double)CurrentParams.rate};
+	DisplaySpec sdlSpec("0", "Fullscreen", sdlMode);
 	out.insert( sdlSpec );
 }
 
