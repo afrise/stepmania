@@ -29,46 +29,46 @@ static SDL_Surface* screenSurface = NULL;
 
 LowLevelWindow_SDL::LowLevelWindow_SDL()
 {
-	
 	SDL_SetMainReady();
-	int numDisplayModes = SDL_GetNumDisplayModes(0);
-
-	//default to basic displaymode.
-	SDL_DisplayMode* displayMode;
-	SDL_GetDisplayMode(0, 0, displayMode);
-	
-	ActualVideoModeParams parms;
-	
-	parms.width=displayMode->w;
-	parms.height=displayMode->h;
-	parms.bSmoothLines=false;
-	parms.bTrilinearFiltering=false;
-	parms.bAnisotropicFiltering=false;
-	parms.windowWidth=displayMode->w;
-	parms.windowHeight=displayMode->h;
-	parms.fDisplayAspectRatio=displayMode->w / displayMode->h,
-	parms.rate=displayMode->refresh_rate;
-	parms.bpp=SDL_BITSPERPIXEL(displayMode->format);
-	parms.renderOffscreen=true;
-
-	CurrentParams = parms;
-
 	SDL_Init (SDL_INIT_VIDEO);
+
+	CurrentParams = ActualVideoModeParams(
+		VideoModeParams(
+			PREFSMAN->m_bWindowed,
+			PREFSMAN->m_sDisplayId,
+			PREFSMAN->m_iDisplayWidth,
+			PREFSMAN->m_iDisplayHeight,
+			PREFSMAN->m_iDisplayColorDepth,
+			PREFSMAN->m_iRefreshRate,
+			PREFSMAN->m_bVsync,
+			PREFSMAN->m_bInterlaced,
+			PREFSMAN->m_bSmoothLines,
+			PREFSMAN->m_bTrilinearFiltering,
+			PREFSMAN->m_bAnisotropicFiltering,
+			PREFSMAN->m_bFullscreenIsBorderlessWindow,
+			PREFSMAN->m_sMachineName,
+			"",
+			PREFSMAN->m_bPAL,
+			PREFSMAN->m_fDisplayAspectRatio),	
+		PREFSMAN->m_iDisplayWidth,
+		PREFSMAN->m_iDisplayHeight,
+		true);
 	
 	window = SDL_CreateWindow(
-			"stepmania", 
+			CurrentParams.sWindowTitle, 
 			SDL_WINDOWPOS_CENTERED, 
 			SDL_WINDOWPOS_CENTERED, 
-			parms.width,
-			parms.height, 
+			CurrentParams.width,
+			CurrentParams.height, 
 			SDL_WINDOW_OPENGL
 		);
 
 	g_pContext = SDL_GL_CreateContext(window);
 
-    glViewport(0, 0, parms.width, parms.height);
+    glViewport(0, 0, CurrentParams.width, CurrentParams.height);
     glClearColor(0.f, 0.f, 0.f, 0.f);
-  
+    glClear(GL_COLOR_BUFFER_BIT);
+	SDL_GL_SwapWindow(window);
 	SDL_GL_SetSwapInterval(0);
 }
 
@@ -118,7 +118,7 @@ bool LowLevelWindow_SDL::IsSoftwareRenderer( RString &sError )
 
 void LowLevelWindow_SDL::SwapBuffers()
 {
-	//SDL_GL_SwapWindow(window); //isn't this handled by SDL now?
+	SDL_GL_SwapWindow(window); 
 }
 
 void LowLevelWindow_SDL::GetDisplaySpecs(DisplaySpecs &out) const {
