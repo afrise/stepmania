@@ -256,11 +256,6 @@ if(WITH_OGG)
   endif()
 endif()
 
-if(WITH_SDL)
-  find_package(SDL2 REQUIRED)
-  set(HAS_SDL TRUE)
-endif()
-
 find_package(nasm)
 find_package(yasm)
 
@@ -382,6 +377,12 @@ elseif(LINUX)
   if(WITH_X11)
     find_package(X11 REQUIRED)
     set(HAS_X11 TRUE)
+  endif()
+
+  set(HAS_SDL FALSE)
+  if(WITH_SDL)
+    find_package(SDL2 REQUIRED)
+    set(HAS_SDL TRUE)
   endif()
 
   find_package("ZLIB" REQUIRED)
