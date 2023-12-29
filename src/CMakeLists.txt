@@ -624,6 +624,7 @@ else() # Unix / Linux TODO: Remember to find and locate the zip archive files.
 
   if(X11_FOUND)
     list(APPEND SMDATA_LINK_LIB ${X11_LIBRARIES})
+    sm_add_compile_definition("${SM_EXE_NAME}" HAVE_X11)
   endif()
 
   if(SDL2_FOUND)

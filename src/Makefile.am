@@ -291,6 +291,10 @@ if HAVE_X11
  ArchUtils += archutils/Unix/X11Helper.cpp archutils/Unix/X11Helper.h
 endif
 
+if HAVE_SDL
+ LowLevelWindow += arch/LowLevelWindow/LowLevelWindow_SDL.cpp arch/LowLevelWindow/LowLevelWindow_SDL.h
+#endif
+
 # =========================
 # Platform-specific drivers
 # =========================

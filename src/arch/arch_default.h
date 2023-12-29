@@ -30,7 +30,12 @@
 
 #elif defined(UNIX)
 #include "ArchHooks/ArchHooks_Unix.h"
+
+#if defined(HAVE_X11)
 #include "LowLevelWindow/LowLevelWindow_X11.h"
+#else
+#include "LowLevelWindow/LowLevelWindow_SDL.h"
+#endif
 
 #if defined(LINUX)
 #include "MemoryCard/MemoryCardDriverThreaded_Linux.h"
@@ -40,7 +45,13 @@
 #include "LoadingWindow/LoadingWindow_Gtk.h"
 #endif
 #if defined(LINUX)
+
+#if defined(HAVE_X11)
 #define DEFAULT_INPUT_DRIVER_LIST "X11,LinuxEvent,LinuxJoystick"
+#else
+#define DEFAULT_INPUT_DRIVER_LIST "LinuxEvent,LinuxJoystick"
+#endif 
+
 #else
 #define DEFAULT_INPUT_DRIVER_LIST "X11"
 #endif
