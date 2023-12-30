@@ -100,7 +100,7 @@ void *LowLevelWindow_SDL::GetProcAddress( RString s )
 
 RString LowLevelWindow_SDL::TryVideoMode( const VideoModeParams &p, bool &bNewDeviceOut )
 {
-	LOG->Info( "LowLevelWindow_SDL: TryVideoMode(%sx%x)"), p.width, p.height;
+	LOG->Info( "LowLevelWindow_SDL: TryVideoMode(%s x %s)"), p.width, p.height;
 	bool bFirstRun = g_pContext == nullptr;
 	bNewDeviceOut = false;
 	return "";
