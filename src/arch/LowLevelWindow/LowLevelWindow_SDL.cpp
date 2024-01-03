@@ -53,6 +53,8 @@ LowLevelWindow_SDL::LowLevelWindow_SDL()
 		PREFSMAN->m_iDisplayWidth,
 		PREFSMAN->m_iDisplayHeight,
 		true);
+
+	LOG->Info("LowLevelWindow_SDL: CurrentParams: %dx%d", CurrentParams.width, CurrentParams.height);
 	
 	window = SDL_CreateWindow(
 			CurrentParams.sWindowTitle, 
@@ -101,7 +103,6 @@ void *LowLevelWindow_SDL::GetProcAddress( RString s )
 RString LowLevelWindow_SDL::TryVideoMode( const VideoModeParams &p, bool &bNewDeviceOut )
 {
 	LOG->Info( "LowLevelWindow_SDL: TryVideoMode(%u x %u)"), p.width, p.height;
-	bool bFirstRun = g_pContext == nullptr;
 	bNewDeviceOut = false;
 	return "";
 }
