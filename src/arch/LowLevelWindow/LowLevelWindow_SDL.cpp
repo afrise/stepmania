@@ -123,6 +123,7 @@ void LowLevelWindow_SDL::SwapBuffers()
 
 void LowLevelWindow_SDL::GetDisplaySpecs(DisplaySpecs &out) const {
 	out.clear();
+	LOG->Info("LowLevelWindow_SDL::GetDisplaySpecs() %d x %d", CurrentParams.width, CurrentParams.height);
 	DisplayMode sdlMode = {(uint)(CurrentParams.width), (uint)(CurrentParams.height), (double)CurrentParams.rate};
 	DisplaySpec sdlSpec("0", "Fullscreen", sdlMode);
 	out.insert( sdlSpec );
