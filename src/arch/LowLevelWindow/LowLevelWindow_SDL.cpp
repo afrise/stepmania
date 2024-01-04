@@ -26,37 +26,22 @@ static bool g_bChangedScreenSize = false;
 
 static SDL_Window* window = NULL;
 static SDL_Surface* screenSurface = NULL;
-static SDL_DisplayMode* currentMode = NULL;
 
 LowLevelWindow_SDL::LowLevelWindow_SDL()
 {
 	SDL_SetMainReady();
 	SDL_Init (SDL_INIT_VIDEO);
 
-	int numDisplays = 0;
-	numDisplays = SDL_GetNumVideoDisplays();
-	LOG->Info("SDL_NumDisplays: %s", numDisplays);
 
-	int numDisplayModes = 0;
-	numDisplayModes = SDL_GetNumDisplayModes(0);
-	LOG->Info("SDL_NumDisplayModes: %s", numDisplayModes);
-
-	if (SDL_GetDisplayMode(0, 0, currentMode) != 0)
-	{
-		LOG->Info("SDL CurrentDisplayModeError: %s", SDL_GetError());
-	}
-
-	LOG->Info("SDL_CurrentDisplayInfo: %sx%s %sHz", currentMode->w, currentMode->h, currentMode->refresh_rate);
-	
 
 	CurrentParams = ActualVideoModeParams(
 		VideoModeParams(
 			false,
 			"0",
-			currentMode->w,
-			currentMode->h,
-			SDL_BITSPERPIXEL(currentMode->format),
-			currentMode->refresh_rate,
+			PREFSMAN->m_iDisplayWidth,
+			PREFSMAN->m_iDisplayHeight,
+			PREFSMAN->m_iDisplayColorDepth,
+			60,
 			true,
 			PREFSMAN->m_bInterlaced,
 			PREFSMAN->m_bSmoothLines,
@@ -71,8 +56,6 @@ LowLevelWindow_SDL::LowLevelWindow_SDL()
 		PREFSMAN->m_iDisplayHeight,
 		true);
 
-	LOG->Info("LowLevelWindow_SDL: CurrentParams: %dx%d", CurrentParams.width, CurrentParams.height);
-	
 	window = SDL_CreateWindow(
 			CurrentParams.sWindowTitle, 
 			SDL_WINDOWPOS_CENTERED, 
@@ -119,9 +102,6 @@ void *LowLevelWindow_SDL::GetProcAddress( RString s )
 
 RString LowLevelWindow_SDL::TryVideoMode( const VideoModeParams &p, bool &bNewDeviceOut )
 {
-	int windowWidth = p.width;
-	int windowHeight = p.height;
-	LOG->Info( "LowLevelWindow_SDL: TryVideoMode(%d x %d)"), windowWidth, windowHeight;
 	bNewDeviceOut = false;
 	return "";
 }
@@ -144,8 +124,8 @@ void LowLevelWindow_SDL::SwapBuffers()
 void LowLevelWindow_SDL::GetDisplaySpecs(DisplaySpecs &out) const {
 	out.clear();
 	
-	DisplayMode standardDefinition = {640, 480, 60.0};
-	DisplaySpec sdSpec("0", "480p", standardDefinition);
+	DisplayMode standardDefinition = {CurrentParams.width, CurrentParams.height, 60.0};
+	DisplaySpec sdSpec("0", "SDL", standardDefinition);
 	out.insert( sdSpec );
 
 }
