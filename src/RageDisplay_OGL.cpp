@@ -469,7 +469,9 @@ static LocalizedString OBTAIN_AN_UPDATED_VIDEO_DRIVER ( "RageDisplay_Legacy", "O
 static LocalizedString GLDIRECT_IS_NOT_COMPATIBLE ( "RageDisplay_Legacy", "GLDirect was detected.  GLDirect is not compatible with this game and should be disabled." );
 RString RageDisplay_Legacy::Init( const VideoModeParams &p, bool bAllowUnacceleratedRenderer )
 {
+	LOG->Info("RageDisplay_Legacy::Init(%d %d)", p.width, p.height);
 	g_pWind = LowLevelWindow::Create();
+	LOG->Info("RageDisplay_Legacy::Init: trying setvideomode");
 
 	bool bIgnore = false;
 	RString sError = SetVideoMode( p, bIgnore );

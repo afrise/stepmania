@@ -798,6 +798,7 @@ RageDisplay *CreateDisplay()
 		if( pRet == nullptr )
 			continue;
 
+		LOG->Info("StepMania::RageDisplayRenderer loaded. Attempting to init.");
 		RString sError = pRet->Init( params, PREFSMAN->m_bAllowUnacceleratedRenderer );
 		if( !sError.empty() )
 		{
