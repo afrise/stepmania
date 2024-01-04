@@ -71,7 +71,7 @@ RString RageDisplay::SetVideoMode( VideoModeParams p, bool &bNeedReloadTextures 
 	RString err;
 	vector<RString> vs;
 
-	LOG->Info("RageDisplay::setvideomode: tryVideoMode start");
+	LOG->Info("RageDisplay::setvideomode: tryVideoMode(%dx%d) start", p.width, p.height);
 
 	if( (err = this->TryVideoMode(p,bNeedReloadTextures)) == "" )
 		return RString();
