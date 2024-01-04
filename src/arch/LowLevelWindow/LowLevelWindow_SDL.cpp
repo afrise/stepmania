@@ -103,8 +103,8 @@ void *LowLevelWindow_SDL::GetProcAddress( RString s )
 RString LowLevelWindow_SDL::TryVideoMode( const VideoModeParams &p, bool &bNewDeviceOut )
 {
 	LOG->Info( "LowLevelWindow_SDL: TryVideoMode(%d x %d)"), p.width, p.height;
-	bNewDeviceOut = false;
-	if (p.height > 2000)
+	bNewDeviceOut = true;
+	if (p.height > 2000 || p.height < 1)
 		return "on that dumb shit fr";
 	return "";
 }
