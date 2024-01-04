@@ -205,6 +205,7 @@ static void StartDisplay()
 
 	DISPLAY = CreateDisplay();
 
+	LOGO->Info("DISPLAY Created.");
 	update_centering();
 
 	TEXTUREMAN	= new RageTextureManager;
