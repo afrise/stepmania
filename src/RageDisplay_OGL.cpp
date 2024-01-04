@@ -477,7 +477,9 @@ RString RageDisplay_Legacy::Init( const VideoModeParams &p, bool bAllowUnacceler
 	RString sError = SetVideoMode( p, bIgnore );
 	if (sError != "")
 		return sError;
-
+	
+	LOG->Info("RageDisplay_Legacy::Init: video mode set.");
+	
 	// Log driver details
 	g_pWind->LogDebugInformation();
 	LOG->Info( "OGL Vendor: %s", glGetString(GL_VENDOR) );

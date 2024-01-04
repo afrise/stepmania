@@ -71,6 +71,8 @@ RString RageDisplay::SetVideoMode( VideoModeParams p, bool &bNeedReloadTextures 
 	RString err;
 	vector<RString> vs;
 
+	LOG->Info("RageDisplay::setvideomode: tryVideoMode start");
+
 	if( (err = this->TryVideoMode(p,bNeedReloadTextures)) == "" )
 		return RString();
 	LOG->Trace( "TryVideoMode failed: %s", err.c_str() );
@@ -98,6 +100,8 @@ RString RageDisplay::SetVideoMode( VideoModeParams p, bool &bNeedReloadTextures 
 		return SETVIDEOMODE_FAILED.GetValue() + " " + join(";",vs);
 	}
 
+	LOG->Info("RageDisplay::setvideomode: displayspec start");
+
 	DisplaySpec d =  *dr.begin();
 	// Try to find DisplaySpec corresponding to requested display
 	for (const auto &candidate: dr)
@@ -111,6 +115,9 @@ RString RageDisplay::SetVideoMode( VideoModeParams p, bool &bNeedReloadTextures 
 			}
 		}
 	}
+
+	LOG->Info("RageDisplay::setvideomode: displayspec done");
+
 
 	p.sDisplayId = d.id();
 	const DisplayMode supported = d.currentMode() != nullptr ? *d.currentMode() : *d.supportedModes().begin();
