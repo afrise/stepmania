@@ -34,21 +34,21 @@ LowLevelWindow_SDL::LowLevelWindow_SDL()
 
 	CurrentParams = ActualVideoModeParams(
 		VideoModeParams(
-			PREFSMAN->m_bWindowed,
-			PREFSMAN->m_sDisplayId,
+			false,
+			"0",
 			PREFSMAN->m_iDisplayWidth,
 			PREFSMAN->m_iDisplayHeight,
 			PREFSMAN->m_iDisplayColorDepth,
-			PREFSMAN->m_iRefreshRate,
-			PREFSMAN->m_bVsync,
+			60,
+			true,
 			PREFSMAN->m_bInterlaced,
 			PREFSMAN->m_bSmoothLines,
 			PREFSMAN->m_bTrilinearFiltering,
 			PREFSMAN->m_bAnisotropicFiltering,
-			PREFSMAN->m_bFullscreenIsBorderlessWindow,
-			PREFSMAN->m_sMachineName,
+			false,
 			"",
-			PREFSMAN->m_bPAL,
+			"",
+			false,
 			PREFSMAN->m_fDisplayAspectRatio),	
 		PREFSMAN->m_iDisplayWidth,
 		PREFSMAN->m_iDisplayHeight,
@@ -126,6 +126,7 @@ void LowLevelWindow_SDL::SwapBuffers()
 
 void LowLevelWindow_SDL::GetDisplaySpecs(DisplaySpecs &out) const {
 	out.clear();
+	
 	DisplayMode standardDefinition = {640, 480, 60.0};
 	DisplaySpec sdSpec("0", "480p", standardDefinition);
 	out.insert( sdSpec );

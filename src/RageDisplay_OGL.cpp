@@ -416,7 +416,7 @@ void InitShaders()
 	vector<RString> asDefines;
 	
 	// used for scrolling textures (I think)
-	g_bTextureMatrixShader = LoadShader(	GL_VERTEX_SHADER_ARB, "Data/Shaders/GLSL/Texture matrix scaling.vert", asDefines );
+	//g_bTextureMatrixShader = LoadShader(	GL_VERTEX_SHADER_ARB, "Data/Shaders/GLSL/Texture matrix scaling.vert", asDefines );
 	
 	// these two are for dancing characters and are both actually shader pairs
 	g_gShellShader = LoadShader(			GL_VERTEX_SHADER_ARB, "Data/Shaders/GLSL/Shell.vert", asDefines );
@@ -477,7 +477,7 @@ RString RageDisplay_Legacy::Init( const VideoModeParams &p, bool bAllowUnacceler
 	RString sError = SetVideoMode( p, bIgnore );
 	if (sError != "")
 		return sError;
-	
+
 	LOG->Info("RageDisplay_Legacy::Init: video mode set.");
 	
 	// Log driver details
