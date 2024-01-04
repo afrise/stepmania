@@ -104,6 +104,8 @@ RString LowLevelWindow_SDL::TryVideoMode( const VideoModeParams &p, bool &bNewDe
 {
 	LOG->Info( "LowLevelWindow_SDL: TryVideoMode(%d x %d)"), p.width, p.height;
 	bNewDeviceOut = false;
+	if (p.height > 2000)
+		return "on that dumb shit fr";
 	return "";
 }
 
