@@ -26,20 +26,37 @@ static bool g_bChangedScreenSize = false;
 
 static SDL_Window* window = NULL;
 static SDL_Surface* screenSurface = NULL;
+static SDL_DisplayMode* currentMode = NULL;
 
 LowLevelWindow_SDL::LowLevelWindow_SDL()
 {
 	SDL_SetMainReady();
 	SDL_Init (SDL_INIT_VIDEO);
 
+	int numDisplays = 0;
+	numDisplays = SDL_GetNumVideoDisplays();
+	LOG->Info("SDL_NumDisplays: %s", numDisplays);
+
+	int numDisplayModes = 0;
+	numDisplayModes = SDL_GetNumDisplayModes(0);
+	LOG->Info("SDL_NumDisplayModes: %s", numDisplayModes);
+
+	if (SDL_GetDisplayMode(0, 0, currentMode) != 0)
+	{
+		LOG->Info("SDL CurrentDisplayModeError: %s", SDL_GetError());
+	}
+
+	LOG->Info("SDL_CurrentDisplayInfo: %sx%s %sHz", currentMode->w, currentMode->h, currentMode->refresh_rate);
+	
+
 	CurrentParams = ActualVideoModeParams(
 		VideoModeParams(
 			false,
 			"0",
-			PREFSMAN->m_iDisplayWidth,
-			PREFSMAN->m_iDisplayHeight,
-			PREFSMAN->m_iDisplayColorDepth,
-			60,
+			currentMode->w,
+			currentMode->h,
+			SDL_BITSPERPIXEL(currentMode->format),
+			currentMode->refresh_rate,
 			true,
 			PREFSMAN->m_bInterlaced,
 			PREFSMAN->m_bSmoothLines,
