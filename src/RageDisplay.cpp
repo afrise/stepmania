@@ -75,7 +75,7 @@ RString RageDisplay::SetVideoMode( VideoModeParams p, bool &bNeedReloadTextures 
 
 	if( (err = this->TryVideoMode(p,bNeedReloadTextures)) == "" )
 		return RString();
-	LOG->Trace( "TryVideoMode failed: %s", err.c_str() );
+	LOG->Info( "TryVideoMode failed: %s", err.c_str() );
 	vs.push_back( err );
 
 	// fall back to settings that will most likely work
