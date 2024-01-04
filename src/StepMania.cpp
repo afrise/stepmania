@@ -112,6 +112,8 @@ void StepMania::GetPreferredVideoModeParams( VideoModeParams &paramsOut )
 		PREFSMAN->m_bPAL,
 		PREFSMAN->m_fDisplayAspectRatio
 	);
+
+	LOG->Info("Preferred VideoModeParams: %dx%d" paramsOut.width, paramsOut.height);
 }
 
 static LocalizedString COLOR			("StepMania","color");
