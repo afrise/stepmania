@@ -105,7 +105,7 @@ RString LowLevelWindow_SDL::TryVideoMode( const VideoModeParams &p, bool &bNewDe
 	int windowWidth = p.width;
 	int windowHeight = p.height;
 	LOG->Info( "LowLevelWindow_SDL: TryVideoMode(%d x %d)"), windowWidth, windowHeight;
-	bNewDeviceOut = true;
+	bNewDeviceOut = false;
 	return "";
 }
 
