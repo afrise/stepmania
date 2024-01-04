@@ -104,8 +104,6 @@ RString LowLevelWindow_SDL::TryVideoMode( const VideoModeParams &p, bool &bNewDe
 {
 	LOG->Info( "LowLevelWindow_SDL: TryVideoMode(%d x %d)"), p.width, p.height;
 	bNewDeviceOut = true;
-	if (p.height > 2000 || p.height < 1)
-		return "on that dumb shit fr";
 	return "";
 }
 
@@ -126,10 +124,10 @@ void LowLevelWindow_SDL::SwapBuffers()
 
 void LowLevelWindow_SDL::GetDisplaySpecs(DisplaySpecs &out) const {
 	out.clear();
-	LOG->Info("LowLevelWindow_SDL::GetDisplaySpecs() %d x %d", CurrentParams.width, CurrentParams.height);
-	DisplayMode sdlMode = {(uint)(CurrentParams.width), (uint)(CurrentParams.height), (double)CurrentParams.rate};
-	DisplaySpec sdlSpec("0", "Fullscreen", sdlMode);
-	out.insert( sdlSpec );
+	DisplayMode standardDefinition = {640, 480, 60.0};
+	DisplaySpec sdSpec("0", "480p", standardDefinition);
+	out.insert( sdSpec );
+
 }
 
 bool LowLevelWindow_SDL::SupportsThreadedRendering()
